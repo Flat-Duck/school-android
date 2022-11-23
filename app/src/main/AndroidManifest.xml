@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ly.smarthive.school">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
+        android:name=".AppController"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.School"
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.StudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MessagesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AttendancesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TimeTableActivity"
+            android:exported="false"
+            android:label="الغياب" />
+        <activity
+            android:name=".activity.ExamsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SubjectsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true">
+        </activity>
+    </application>
+
+</manifest>

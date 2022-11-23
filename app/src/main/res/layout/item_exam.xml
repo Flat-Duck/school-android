@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    android:paddingVertical="10dp"
+    android:layoutDirection="rtl"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="10dp"
+    tools:layout_editor_absoluteX="192dp"
+    tools:layout_editor_absoluteY="275dp">
+
+    <TextView
+        android:id="@+id/subject_text"
+        android:gravity="center_vertical|start"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="رياضيات"
+        android:textAlignment="inherit" />
+
+    <TextView
+        android:id="@+id/period_text"
+        android:textColor="@color/black"
+        android:gravity="center_vertical|start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="الاولى" />
+    <TextView
+        android:id="@+id/date_text"
+        android:textColor="@color/black"
+        android:gravity="center_vertical|start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="22/10/2021" />
+
+</LinearLayout>
