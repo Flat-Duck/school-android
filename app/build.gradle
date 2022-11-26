@@ -16,10 +16,10 @@ android {
     }
     signingConfigs {
         debug {
-        //    storeFile rootProject.file('debug.keystore')
-            keyAlias 'myKeyStore'
-            keyPassword 'Zix-@0926409889'
-            storePassword 'Zix-@0926409889'
+            storeFile rootProject.file('debug.keystore')
+            keyAlias 'androiddebugkey'
+            keyPassword ''
+            storePassword ''
         }
     }
 
