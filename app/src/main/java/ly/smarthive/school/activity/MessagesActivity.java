@@ -118,7 +118,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     private void sendMessage() {
         if (editText.getText().toString().trim().equals("")) {
-            Toast.makeText(MessagesActivity.this, "please_enter_message", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(MessagesActivity.this, "please_enter_message", Toast.LENGTH_SHORT).show();
         } else {
             String message = editText.getText().toString();
             syncMessage(message);
@@ -140,7 +140,7 @@ public class MessagesActivity extends AppCompatActivity {
 
 
 
-        }, error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show()) {
+        }, error -> Log.e(TAG,error.getMessage())){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headerMap = new HashMap<String, String>();
