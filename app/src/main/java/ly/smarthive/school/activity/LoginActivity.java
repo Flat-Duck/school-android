@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "P:" + email + "//W:" + password);
                 login();
             } else {
-                Toast.makeText(getApplicationContext(), R.string.please_enter_credentials, Toast.LENGTH_LONG).show();
+             //   Toast.makeText(getApplicationContext(), R.string.please_enter_credentials, Toast.LENGTH_LONG).show();
             }
         });
         builder.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         if (checkNotEmpty()) {
             sendLogin();
         } else {
-            Toast.makeText(getApplicationContext(), R.string.please_enter_credentials, Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getApplicationContext(), R.string.please_enter_credentials, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -108,15 +108,17 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     String errorMsg = jObj.getString("message");
-                    Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                    Log.e(TAG,errorMsg);
+                    //Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e(TAG,e.getMessage());
             }
         }, error -> {
             Log.e(TAG, "Login Error: " + error.getMessage());
-            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             hideDialog();
         }) {
             @Override
