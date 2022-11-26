@@ -1,17 +1,17 @@
 package ly.smarthive.school.models;
-
 public class Message {
     int id;
     String message;
-    User sender;
-    String createdAt;
+    String date;
+    private boolean isMine;
+
 
     public Message() {}
+
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -24,19 +24,19 @@ public class Message {
         this.message = message;
     }
 
-    public User getSender() {
-        return sender;
+    public String getDate() {
+        return date;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public boolean isMine() {
+        return isMine;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setMine(boolean mine) {
+        isMine = mine;
     }
 }

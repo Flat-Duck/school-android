@@ -10,6 +10,7 @@ public class COMMON {
     public static  String ATTENDANCE_URL = "/attendances";
     public static  String SUBJECTS_URL = "/subjects";
     public static  String EXAMS_URL = "/exams";
+    public static  String CHATS_URL = BASE_URL + "chats";
     public static  String STUDENTS_URL = BASE_URL + "main";
 
     public static  String UPDATE_PASSWORD_URL = BASE_URL + "/password/";

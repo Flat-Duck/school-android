@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.android.volley.Cache;
 import com.android.volley.VolleyLog;
@@ -33,7 +34,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import ly.smarthive.school.AppController;
-import ly.smarthive.school.COMMON;
 import ly.smarthive.school.MyDividerItemDecoration;
 import ly.smarthive.school.R;
 import ly.smarthive.school.SessionManager;
@@ -50,6 +50,7 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
     private StudentsDataAdapter mAdapter;
     Context context;
     SessionManager session;
+    Button inquiryBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,9 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
         context = this;
         session = new SessionManager(this);
         USER_TOKEN = session.getToken();
+        inquiryBtn =findViewById(R.id.inquiryBtn);
+        inquiryBtn.setOnClickListener(view -> startActivity(new Intent(StudentsActivity.this,MessagesActivity.class)));
+
         RecyclerView recyclerView = findViewById(R.id.students_rv);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -86,9 +90,6 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
         onBackPressed();
         return true;
     }
-
-
-
 
     private void GetStudents() {
         JsonObjectRequest jsonReq = new JsonObjectRequest(com.android.volley.Request.Method.GET, STUDENTS_URL, null, response -> {
@@ -138,27 +139,5 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
         STUDENT_ID = session.getStudentId();
         Intent intent = new Intent(StudentsActivity.this,MainActivity.class);
         startActivity(intent);
-//        String ACTION_URL = REQUESTS_URL + request.getId() + (accept ? ACCEPT_REQUEST_URL : REFUSE_REQUEST_URL);
-//        JsonObjectRequest jsonReq = new JsonObjectRequest(com.android.volley.Request.Method.POST, ACTION_URL, null, response -> {
-//            VolleyLog.d(TAG, "Response: " + response.toString());
-//            Log.e("RE", response.toString());
-//            try {
-//                if (response.getBoolean("success")) {
-//                    Toast.makeText(context, "The request has been Updated", Toast.LENGTH_LONG).show();
-//                    GrabAllRequests();
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }, error -> Log.d("VOLLEY ERROR", error.toString())) {
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> headerMap = new HashMap<>();
-//                headerMap.put("Content-Type", "application/json");
-//                headerMap.put("Authorization", "Bearer " + USER_TOKEN);
-//                return headerMap;
-//            }
-//        };
-//        AppController.getInstance().addToRequestQueue(jsonReq);
     }
 }

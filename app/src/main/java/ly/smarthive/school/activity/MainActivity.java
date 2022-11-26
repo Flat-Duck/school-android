@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         timeTableBtn.setOnClickListener(view -> {
 
-            Intent intent = new Intent(MainActivity.this,TimeTableActivity.class);
+            Intent intent = new Intent(MainActivity.this,MessagesActivity.class);
             startActivity(intent);
         });
         subjectBtn.setOnClickListener(view -> {
