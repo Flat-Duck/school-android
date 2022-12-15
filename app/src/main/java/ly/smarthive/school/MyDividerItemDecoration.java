@@ -12,10 +12,6 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Created by ravi on 17/11/17.
- */
-
 public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{
@@ -57,7 +53,7 @@ public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     public void drawVertical(Canvas c, RecyclerView parent) {
-        final int left = parent.getPaddingLeft();
+        final int left = -100;//parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
 
         final int childCount = parent.getChildCount();

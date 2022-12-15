@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:weightSum="4">
+
+    <TextView
+        android:id="@+id/total_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="50" />
+
+
+    <TextView
+        android:id="@+id/val_2_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="30" />
+
+    <TextView
+        android:id="@+id/val_1_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="20" />
+    <TextView
+        android:id="@+id/subject_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"
+        android:text="رياضيات" />
+</LinearLayout>

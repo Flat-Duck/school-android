@@ -1,44 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="ly.smarthive.school">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true"
         android:name=".AppController"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.School"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.MarksActivity"
+            android:exported="false"
+            android:label="الدرجات" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity
             android:name=".activity.StudentsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="أطفالي" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.MessagesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="إستفسارات" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.AttendancesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="الغياب" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.TimeTableActivity"
             android:exported="false"
-            android:label="الغياب" />
+            android:label="الجدول الدراسي" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.ExamsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="مواعيد الاختبارات" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.SubjectsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="المواد الدراسية" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" >
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,6 +88,9 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.StudentsActivity" />
         </activity>
     </application>
 

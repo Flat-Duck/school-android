@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="admin@test.com" />
+                android:text="a.mahidwei@outlook.com" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="123456"
+                android:text="0919258142"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
