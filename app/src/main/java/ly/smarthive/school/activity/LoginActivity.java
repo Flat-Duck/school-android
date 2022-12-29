@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnCancel = findViewById(R.id.btnCancel);
         btnSignIn = findViewById(R.id.btnSignIn);
-        btnCancel.setOnClickListener(v -> finish());
+        btnCancel.setOnClickListener(v -> finishAffinity());
         btnSignIn.setOnClickListener(v -> showSignInDialog());
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        finishAffinity();
     }
 
     @Override
