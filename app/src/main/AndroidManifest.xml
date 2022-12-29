@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="ly.smarthive.school">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".AppController"
         android:allowBackup="true"
@@ -19,9 +19,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.NotesActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.MarksActivity"
             android:exported="false"
-            android:label="الدرجات" >
+            android:label="الدرجات">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -29,7 +36,7 @@
         <activity
             android:name=".activity.StudentsActivity"
             android:exported="false"
-            android:label="أطفالي" >
+            android:label="أطفالي">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -37,7 +44,7 @@
         <activity
             android:name=".activity.MessagesActivity"
             android:exported="false"
-            android:label="إستفسارات" >
+            android:label="إستفسارات">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -45,7 +52,7 @@
         <activity
             android:name=".activity.AttendancesActivity"
             android:exported="false"
-            android:label="الغياب" >
+            android:label="الغياب">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -53,8 +60,7 @@
         <activity
             android:name=".activity.TimeTableActivity"
             android:exported="false"
-            android:label="الجدول الدراسي" >
-
+            android:label="الجدول الدراسي">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -62,7 +68,7 @@
         <activity
             android:name=".activity.ExamsActivity"
             android:exported="false"
-            android:label="مواعيد الاختبارات" >
+            android:label="مواعيد الاختبارات">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -70,7 +76,7 @@
         <activity
             android:name=".activity.SubjectsActivity"
             android:exported="false"
-            android:label="المواد الدراسية" >
+            android:label="المواد الدراسية">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />

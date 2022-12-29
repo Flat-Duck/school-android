@@ -81,6 +81,17 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        //onBackPressed();
+        finish();
+        return true;
+    }
     /**
      * function to verify login details in mysql db
      */

@@ -34,7 +34,7 @@ import ly.smarthive.school.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    CardView subjectBtn,examsBtn,timeTableBtn,marksBtn,attendanceBtn;
+    CardView subjectBtn,examsBtn,timeTableBtn,marksBtn,attendanceBtn,noteBtn;
     TextView name,grade,room, number;
     SessionManager sessionManager;
     Context context;
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         timeTableBtn = findViewById(R.id.cvTimeTable);
         marksBtn = findViewById(R.id.cvMarks);
         attendanceBtn = findViewById(R.id.cvAttendance);
+        noteBtn = findViewById(R.id.cvNotes);
 
 
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
@@ -106,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        noteBtn.setOnClickListener(view -> {
+
+            Intent intent = new Intent(MainActivity.this,NotesActivity.class);
+            startActivity(intent);
+
+        });
+
     }
 
     private void getStudentData() {
@@ -147,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-    //    getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -157,9 +165,15 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-    //    if (id == R.id.action_logout) {
-     //       return true;
-      //  }
+        if (id == R.id.logout) {
+            sessionManager.setLogin(false);
+
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            MainActivity.this.finish(); // if the activity running has it's own context
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

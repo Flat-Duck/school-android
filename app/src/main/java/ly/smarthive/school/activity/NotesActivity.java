@@ -1,8 +1,5 @@
 package ly.smarthive.school.activity;
 
-import static ly.smarthive.school.COMMON.STUDENTS_URL;
-
-import static ly.smarthive.school.COMMON.STUDENT_ID;
 import static ly.smarthive.school.COMMON.USER_TOKEN;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 
 import com.android.volley.Cache;
 import com.android.volley.VolleyLog;
@@ -34,36 +29,37 @@ import java.util.Map;
 import java.util.Objects;
 
 import ly.smarthive.school.AppController;
+import ly.smarthive.school.COMMON;
 import ly.smarthive.school.MyDividerItemDecoration;
 import ly.smarthive.school.R;
 import ly.smarthive.school.SessionManager;
-import ly.smarthive.school.adapter.StudentsDataAdapter;
+import ly.smarthive.school.adapter.NotesDataAdapter;
+import ly.smarthive.school.models.Note;
 
-import ly.smarthive.school.models.Student;
+public class NotesActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
 
-public class StudentsActivity extends AppCompatActivity implements StudentsDataAdapter.SelectedItem {
-
-    private static final String TAG = StudentsActivity.class.getSimpleName();
-
-    private final List<Student> studentsList = new ArrayList<>();
-    private StudentsDataAdapter mAdapter;
+    private final List<Note> notesList = new ArrayList<>();
+    private NotesDataAdapter mAdapter;
+    SessionManager sessionManager;
     Context context;
-    SessionManager session;
-    Button inquiryBtn;
+    String URL;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_students);
+        setContentView(R.layout.activity_notes);
 
-        mAdapter = new StudentsDataAdapter(studentsList, this,this);
+        mAdapter = new NotesDataAdapter(notesList, this);
         context = this;
-        session = new SessionManager(this);
-        USER_TOKEN = session.getToken();
-        inquiryBtn =findViewById(R.id.inquiryBtn);
-        inquiryBtn.setOnClickListener(view -> startActivity(new Intent(StudentsActivity.this,MessagesActivity.class)));
+        sessionManager = new SessionManager(this);
+        int SId = sessionManager.getStudentId();
+        URL = COMMON.getUrl("notes",SId);
+        context = this;
 
-        RecyclerView recyclerView = findViewById(R.id.students_rv);
+        RecyclerView recyclerView = findViewById(R.id.notes_rv);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -71,7 +67,7 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
         recyclerView.setAdapter(mAdapter);
 
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
-        Cache.Entry entry = cache.get(STUDENTS_URL);
+        Cache.Entry entry = cache.get(URL);
         if (entry != null) {
             String data = new String(entry.data, StandardCharsets.UTF_8);
             try {
@@ -80,20 +76,20 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
                 e.printStackTrace();
             }
         } else {
-            GetStudents();
+            GetNotes();
         }
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        //onBackPressed();
-        finish();
+        onBackPressed();
         return true;
     }
 
-    private void GetStudents() {
-        JsonObjectRequest jsonReq = new JsonObjectRequest(com.android.volley.Request.Method.GET, STUDENTS_URL, null, response -> {
+
+    private void GetNotes() {
+        JsonObjectRequest jsonReq = new JsonObjectRequest(com.android.volley.Request.Method.GET, URL, null, response -> {
             VolleyLog.d(TAG, "Response: " + response.toString());
             Log.e("RE", response.toString());
             parseJsonFeed(response);
@@ -115,16 +111,15 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
 
     @SuppressLint("NotifyDataSetChanged")
     private void parseJsonFeed(JSONObject response) {
-        studentsList.clear();
+        notesList.clear();
         try {
             JSONArray feedArray = response.getJSONArray("data");
             for (int i = 0; i < feedArray.length(); i++) {
                 JSONObject feedObj = (JSONObject) feedArray.get(i);
-                Student student = new Student();
-                student.setId(feedObj.getInt("id"));
-                student.setName(feedObj.getString("name"));
-                student.setGrade(feedObj.getString("grade_name") + " / "+ feedObj.getString("room_name"));
-                studentsList.add(student);
+                Note note = new Note();
+                note.setId(feedObj.getInt("id"));
+                note.setContent(feedObj.getString("content"));
+                notesList.add(note);
                 mAdapter.notifyDataSetChanged();
             }
         } catch (JSONException e) {
@@ -132,13 +127,50 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
         }
     }
 
-    @Override
-    public void selectedItem(Student student) {
-        Log.e(TAG,student.getName());
-        STUDENT_ID = student.getId();
-        session.setStudentId(STUDENT_ID);
-        STUDENT_ID = session.getStudentId();
-        Intent intent = new Intent(StudentsActivity.this,MainActivity.class);
-        startActivity(intent);
-    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.donnors_menu, menu);
+//
+//        // Associate searchable configuration with the SearchView
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+//        searchView.setSearchableInfo(searchManager
+//                .getSearchableInfo(getComponentName()));
+//        searchView.setMaxWidth(Integer.MAX_VALUE);
+//
+//        // listening to search query text change
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                // filter recycler view when query submitted
+//                mAdapter.getFilter().filter(query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String query) {
+//                // filter recycler view when text is changed
+//                mAdapter.getFilter().filter(query);
+//                return false;
+//            }
+//        });
+//        return true;
+//    }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_search) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+
 }
