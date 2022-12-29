@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import com.android.volley.Cache;
@@ -91,6 +93,33 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
         finish();
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.logout) {
+            session.setLogin(false);
+            Intent intent = new Intent(StudentsActivity.this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finishAndRemoveTask();
+            //MainActivity.this.finish(); // if the activity running has it's own context
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void GetStudents() {
         JsonObjectRequest jsonReq = new JsonObjectRequest(com.android.volley.Request.Method.GET, STUDENTS_URL, null, response -> {
