@@ -1,79 +1,131 @@
 package ly.smarthive.school.activity;
 
-import static ly.smarthive.school.Util.milliseconds;
+import static ly.smarthive.school.COMMON.USER_TOKEN;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Color;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-
-import com.applikeysolutions.cosmocalendar.selection.MultipleSelectionManager;
-import com.applikeysolutions.cosmocalendar.settings.lists.DisabledDaysCriteria;
-import com.applikeysolutions.cosmocalendar.view.CalendarView;
-
+import com.android.volley.Cache;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import ly.smarthive.school.AppController;
+import ly.smarthive.school.COMMON;
+import ly.smarthive.school.MyDividerItemDecoration;
 import ly.smarthive.school.R;
-//
-//import sun.bob.mcalendarview.MCalendarView;
-//import sun.bob.mcalendarview.vo.DateData;
+import ly.smarthive.school.SessionManager;
+import ly.smarthive.school.adapter.TimeTableDataAdapter;
+import ly.smarthive.school.models.TimeTable;
 
 public class TimeTableActivity extends AppCompatActivity {
 
-   CalendarView calendarView;
+    private static final String TAG = TimeTableActivity.class.getSimpleName();
+    private final List<TimeTable> time_tablesList = new ArrayList<>();
+    private TimeTableDataAdapter mAdapter;
+    SessionManager sessionManager;
+    Context context;
+    String URL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
 
-     //   calendarView = findViewById(R.id.calendarView);
-//        calendarView.setOnClickListener(view -> {
-//
-//        });
+        mAdapter = new TimeTableDataAdapter(time_tablesList, this);
+        sessionManager = new SessionManager(this);
+        int SId = sessionManager.getStudentId();
+        URL = COMMON.getUrl("time_tables",SId);
+        context = this;
 
-//        MultipleSelectionManager ms = new MultipleSelectionManager(CalendarView
-//
-//                );
+        RecyclerView recyclerView = findViewById(R.id.time_tables_rv);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
+        recyclerView.setAdapter(mAdapter);
 
-//        calendarView.setDisabledDayTextColor(Color.RED);
-//     //   calendarView.setDisabledDaysCriteria();
-//        Set<Long> disabledDaysSet = new HashSet<>();
-//      //  disabledDaysSet.add(System.currentTimeMillis());
-//
-//        disabledDaysSet.add(milliseconds("2022-11-30T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-12-01T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-12-02T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-11-01T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-12-05T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-12-061T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-12-07T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-12-08T00:00:00.000000Z"));
-//        disabledDaysSet.add(milliseconds("2022-12-09T00:00:00.000000Z"));
-//        //disabledDaysSet.add(x);
-//        calendarView.setDisabledDays(disabledDaysSet);
+        Cache cache = AppController.getInstance().getRequestQueue().getCache();
+        Cache.Entry entry = cache.get(URL);
+        if (entry != null) {
+            String data = new String(entry.data, StandardCharsets.UTF_8);
+            try {
+                parseJsonFeed(new JSONObject(data));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            GrabAllRequests();
+        }
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
-        //calendarView.setSelectionManager(new MultipleSelectionManager(CalendarView.));
-        //calendarView.Ev
+    private void GrabAllRequests() {
+        JsonObjectRequest jsonReq = new JsonObjectRequest(com.android.volley.Request.Method.GET,   URL, null, response -> {
+            VolleyLog.e(TAG, "Response: " + response.toString());
+            Log.e("RE", response.toString());
+            parseJsonFeed(response);
+        }, error -> Log.d("VOLLEY ERROR", error.toString())) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headerMap = new HashMap<>();
+                headerMap.put("Content-Type", "application/json");
+                headerMap.put("Authorization", "Bearer " + USER_TOKEN);
+                return headerMap;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonReq);
+    }
 
-  //      calendarView = findViewById(R.id.calendarView);
-//
-//        ArrayList<DateData> dates=new ArrayList<>();
-//        dates.add(new DateData(2022,11,21));
-//        dates.add(new DateData(2022,11,27));
+    /**
+     * Parsing json response and passing the data to feed view list adapter
+     **/
 
-        //for(int i=0;i<dates.size();i++) {
-            //mark multiple dates with this code.
-       //     calendarView.markDate(dates.get(i).getYear(),dates.get(i).getMonth(),dates.get(i).getDay());
-        //}
+    @SuppressLint("NotifyDataSetChanged")
+    private void parseJsonFeed(JSONObject response) {
+        time_tablesList.clear();
+        try {
+            JSONArray feedArray = response.getJSONArray("data");
+            JSONObject room = (JSONObject) feedArray.get(0);
+            JSONObject detail = room.getJSONObject("details");
+            Iterator<String> iterator = detail.keys();
+            while(iterator.hasNext()){
+                String day_name = iterator.next();
+                TimeTable time_table = new TimeTable();
+                time_table.setDay(day_name);
+                JSONObject day_classes = detail.getJSONObject(day_name);
+                Iterator<String> iterator2 = day_classes.keys();
+                while(iterator2.hasNext()) {
+                    String class_name =  iterator2.next();
+                    JSONObject clas = day_classes.getJSONObject(class_name);
+                    time_table.setSubs(clas.getString("subject"));
+                }
+                time_tablesList.add(time_table);
+                mAdapter.notifyDataSetChanged();
+            }
 
-
-    //    Log.d("marked dates:-","" + calendarView.getMarkedDates()); //get all marked dates.
-
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -42,6 +42,7 @@ import ly.smarthive.school.SessionManager;
 import ly.smarthive.school.adapter.StudentsDataAdapter;
 
 import ly.smarthive.school.models.Student;
+import ru.nikartm.support.ImageBadgeView;
 
 
 public class StudentsActivity extends AppCompatActivity implements StudentsDataAdapter.SelectedItem {
@@ -52,7 +53,7 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
     private StudentsDataAdapter mAdapter;
     Context context;
     SessionManager session;
-    Button inquiryBtn;
+    ImageBadgeView inquiryBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

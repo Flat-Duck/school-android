@@ -42,7 +42,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.mikhaellopez:circularimageview:4.3.1'
-    //implementation 'sun.bob:mcalendarview:1.0.0'
+    implementation 'io.github.nikartm:image-support:2.0.0'
+
     //implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
     implementation 'androidx.constraintlayout:constraintlayout-core:1.0.4'

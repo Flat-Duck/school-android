@@ -6,13 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.SubjectsActivity">
-    <Button
+
+
+    <ru.nikartm.support.ImageBadgeView
         android:id="@+id/inquiryBtn"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="28dp"
+        android:padding="2dp"
+        android:src="@drawable/messages"
         android:text="اسنفسارات"
-        />
+        app:ibv_badgeColor="#CD0C0C"
+        app:ibv_badgeTextColor="#CD0C0C"
+        app:ibv_badgeValue="1"
+        app:ibv_fixedBadgeRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/students_rv"

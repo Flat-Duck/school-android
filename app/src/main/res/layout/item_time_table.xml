@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layoutDirection="rtl"
+    android:weightSum="7">
+
+    <TextView
+        android:id="@+id/day_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:text="الاحد" />
+
+
+    <TextView
+        android:id="@+id/class_1_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:text="رياضيات" />
+    <TextView
+        android:id="@+id/class_2_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:text="رياضيات" />
+    <TextView
+        android:id="@+id/class_3_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:text="رياضيات" />
+    <TextView
+        android:id="@+id/class_4_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:text="رياضيات" />
+    <TextView
+        android:id="@+id/class_5_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:text="رياضيات" />
+    <TextView
+        android:id="@+id/class_6_text"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:text="رياضيات" />
+
+</TableRow>

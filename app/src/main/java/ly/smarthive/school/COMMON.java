@@ -12,6 +12,7 @@ public class COMMON {
     public static  String EXAMS_URL = "/exams";
     public static  String MARKS_URL = "/marks";
     public static  String NOTES_URL = "/notes";
+    public static  String TIME_TABLE_URL = "/time_tables";
     public static  String CHATS_URL = BASE_URL + "chats";
     public static  String STUDENTS_URL = BASE_URL + "main";
 
@@ -35,6 +36,7 @@ public class COMMON {
     public static final String STU = "student";
     public static final String MRK = "marks";
     public static final String NOT = "notes";
+    public static final String TIM = "time_tables";
 
     public static String getUrl(String name,int id){
         switch (name){
@@ -48,6 +50,8 @@ public class COMMON {
                 return BASE_URL + id + MARKS_URL;
             case NOT:
                 return BASE_URL + id + NOTES_URL;
+            case TIM:
+                return BASE_URL + id + TIME_TABLE_URL;
             case STU:
                 return BASE_URL + id;
             default:
