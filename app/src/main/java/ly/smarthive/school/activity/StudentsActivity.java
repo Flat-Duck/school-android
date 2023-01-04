@@ -1,5 +1,6 @@
 package ly.smarthive.school.activity;
 
+import static com.android.volley.Request.Method.GET;
 import static ly.smarthive.school.COMMON.STUDENTS_URL;
 
 import static ly.smarthive.school.COMMON.STUDENT_ID;
@@ -123,7 +124,7 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
 
 
     private void GetStudents() {
-        JsonObjectRequest jsonReq = new JsonObjectRequest(com.android.volley.Request.Method.GET, STUDENTS_URL, null, response -> {
+        JsonObjectRequest jsonReq = new JsonObjectRequest(GET, STUDENTS_URL, null, response -> {
             VolleyLog.d(TAG, "Response: " + response.toString());
             Log.e("RE", response.toString());
             parseJsonFeed(response);
