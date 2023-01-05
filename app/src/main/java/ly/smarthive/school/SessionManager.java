@@ -51,6 +51,11 @@ import java.io.File;
             editor.commit();
             Log.d(TAG, "student id updated!");
         }
+        public void setLastMillis(long time) {
+            editor.putLong(KEY_MESSAGE_TIME_STAMP, time);
+            editor.commit();
+            Log.d(TAG, "message time stamp updated");
+        }
 
         public void clear() {
             File dir = new File(_context.getFilesDir().getParent() + "/shared_prefs/");
@@ -82,5 +87,9 @@ import java.io.File;
 
         public String getPassword() {
             return pref.getString(KEY_PASSWORD, null);
+        }
+
+        public long getLastMillis() {
+            return pref.getLong(KEY_MESSAGE_TIME_STAMP,0);
         }
     }

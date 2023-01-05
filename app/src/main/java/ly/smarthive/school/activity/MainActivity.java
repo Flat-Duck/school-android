@@ -31,6 +31,7 @@ import ly.smarthive.school.AppController;
 import ly.smarthive.school.COMMON;
 import ly.smarthive.school.R;
 import ly.smarthive.school.SessionManager;
+import ly.smarthive.school.Util;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     SessionManager sessionManager;
     Context context;
     String URL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +141,10 @@ public class MainActivity extends AppCompatActivity {
          **/
         private void parseJsonFeed(JSONObject response) {
 
+
             try {
                 JSONObject obj = response.getJSONObject("data");
+
                 name.setText(obj.getString("name"));
                 grade.setText(obj.getString("grade_name"));
                 room.setText(obj.getString("room_name"));
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
                 e.printStackTrace();
             }
+
         }
 
 

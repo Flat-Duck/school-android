@@ -19,7 +19,7 @@
         app:ibv_badgeColor="#CD0C0C"
         app:ibv_badgeTextColor="#CD0C0C"
         app:ibv_badgeValue="1"
-        app:ibv_fixedBadgeRadius="10dp"
+        app:ibv_fixedBadgeRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

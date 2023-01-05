@@ -11,7 +11,7 @@ static public long milliseconds(String date)
     {
         //String date_ = date;
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try
         {
             Date mDate = sdf.parse(date);

@@ -29,6 +29,7 @@ public class COMMON {
     public static final String KEY_STATUS = "stat";
     public static final String KEY_STUDENT_ID = "student_id";
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_MESSAGE_TIME_STAMP = "last_msg";
 
     private static final String ATT = "attendances";
     public static final String SUB =  "subjects";

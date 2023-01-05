@@ -40,6 +40,7 @@ import ly.smarthive.school.AppController;
 import ly.smarthive.school.MyDividerItemDecoration;
 import ly.smarthive.school.R;
 import ly.smarthive.school.SessionManager;
+import ly.smarthive.school.Util;
 import ly.smarthive.school.adapter.StudentsDataAdapter;
 
 import ly.smarthive.school.models.Student;
@@ -55,6 +56,7 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
     Context context;
     SessionManager session;
     ImageBadgeView inquiryBtn;
+    long last_millis = 0, millis = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +149,10 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
     @SuppressLint("NotifyDataSetChanged")
     private void parseJsonFeed(JSONObject response) {
         studentsList.clear();
+
         try {
+            String last_msg_at = response.getString("time");
+
             JSONArray feedArray = response.getJSONArray("data");
             for (int i = 0; i < feedArray.length(); i++) {
                 JSONObject feedObj = (JSONObject) feedArray.get(i);
@@ -157,6 +162,15 @@ public class StudentsActivity extends AppCompatActivity implements StudentsDataA
                 student.setGrade(feedObj.getString("grade_name") + " / "+ feedObj.getString("room_name"));
                 studentsList.add(student);
                 mAdapter.notifyDataSetChanged();
+            }
+            millis = Util.milliseconds(last_msg_at);
+            last_millis = session.getLastMillis();
+            if(millis > last_millis){
+                inquiryBtn.setFixedBadgeRadius(20);
+                session.setLastMillis(millis);
+            }else{
+                inquiryBtn.setFixedBadgeRadius(0);
+                session.setLastMillis(millis);
             }
         } catch (JSONException e) {
             e.printStackTrace();
